@@ -95,6 +95,19 @@ layout {
     // Set gaps around windows in logical pixels.
     gaps 8
 
+    default-column-display "tabbed"
+
+    tab-indicator {
+        width 8
+        gap 8
+        place-within-column
+        active-color "#c6a0f6cc"
+        inactive-color "#c6a0f633"
+        urgent-color "#ed8796cc"
+        corner-radius 4
+        hide-when-single-tab
+    }
+
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
     //   or right edge of the screen.
@@ -149,7 +162,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#cba6f799"
+        active-color "#cba6f766"
 
         // Color of the ring on inactive monitors.
         inactive-color "#31324466"
@@ -229,12 +242,6 @@ layout {
     // Left and right struts will cause the next window to the side to always be visible.
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
-    struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
-    }
 }
 
 // Add lines like this to spawn processes at startup.
@@ -356,6 +363,26 @@ window-rule {
 }
 
 window-rule {
+    match app-id="com.mitchellh.ghostty.float"
+    open-floating true
+    default-column-width {proportion 0.5;}
+    default-window-height {proportion 0.5;}
+    opacity 0.9
+
+    border {
+        on
+        width 4
+        active-color "#cba6f799"
+        inactive-color "#cba6f766"
+        urgent-color "#f38ba899"
+    }
+
+    focus-ring {
+        off
+    }
+}
+
+window-rule {
     match app-id="Code"
     open-maximized true
     open-on-output "DP-1"
@@ -412,9 +439,10 @@ binds {
     // shows a list of important hotkeys.
     // Suggested binds for running programs: terminal, app launcher, screen locker
 
-    Mod+Return { spawn "ghostty"; }
+    Mod+Return { spawn "ghostty" "--class=com.mitchellh.ghostty.float"; }
+    Mod+Shift+Return { spawn "ghostty"; }
     Mod+D { spawn "walker"; }
-    Mod+L { spawn "swaylock"; }
+    Mod+L { spawn "~/.config/scripts/swaylock.sh"; }
     Mod+N {spawn "nemo";}
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
@@ -652,4 +680,9 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    Mod+Alt+Minus      cooldown-ms=150 { focus-workspace-down; }
+    Mod+Alt+Equal        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+Alt+Minus cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+Alt+Equal   cooldown-ms=150 { move-column-to-workspace-up; }
 }

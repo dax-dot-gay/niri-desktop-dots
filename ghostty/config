@@ -16,6 +16,7 @@
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
 theme = catppuccin-mocha.conf
+shell-integration = zsh
 
 # Config syntax crash course
 # ==========================
