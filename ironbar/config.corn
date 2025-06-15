@@ -1,0 +1,80 @@
+let {
+	$workspaces = {
+		type = "workspaces"
+	}
+
+	$notifications = {
+	    type = "notifications"
+        show_count = true
+        icons.closed_none = "󰂜"
+        icons.closed_some = "󰂜"
+        icons.closed_dnd = "󰪓"
+        icons.open_none = "󰂚"
+        icons.open_some = "󰂚"
+        icons.open_dnd = "󰂠"
+    }
+
+	$tray = {
+		type = "tray"
+		direction = "h"
+		icon_size = 20
+	}
+
+	$clock = {
+		type = "clock"
+		format = "%m/%d/%Y %H:%M"
+	}
+
+	$volume = {
+        type = "volume"
+        format = "{icon} {percentage}%"
+        max_volume = 100
+        icons.volume_high = " "
+        icons.volume_medium = ""
+        icons.volume_low = ""
+        icons.muted = " "
+        on_scroll_up = "volumectl -u up"
+        on_scroll_down = "volumectl -u down"
+	}
+
+	$button = { type = "button" name="power-button" label = "<span font-size='20pt'>󰐥</span>" on_click = "popup:toggle" }
+
+    $popup = {
+        type = "box"
+        orientation = "horizontal"
+        widgets = [
+            {
+                type = "box"
+                widgets = [
+                    { type = "button" class="power-button" label = "<span font-size='20pt'>󰐥</span>" on_click = "!loginctl poweroff" }
+                    { type = "button" class="power-button" label = "<span font-size='20pt'>󰜉</span>" on_click = "!loginctl reboot" }
+					{ type = "button" class="power-button" label = "<span font-size='20pt'>󰤄</span>" on_clock = "!loginctl suspend" }
+                ]
+            }
+        ]
+    }
+
+    $power_menu = {
+        type = "custom"
+        class = "power-menu"
+
+        bar = [ $button ]
+        popup = [ $popup ]
+    }
+
+}
+
+in {
+    anchor_to_edges = true
+	icon_theme = "Flat-Remix-Violet-Dark"
+	start = [ $power_menu $workspaces ]
+	center = [  ]
+	end = [ $tray $volume $clock $notifications ]
+    margin = {
+        top = 4
+        left = 4
+        right = 4
+        bottom = 4
+    }
+    layer = "overlay"
+}
