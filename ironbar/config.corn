@@ -76,5 +76,5 @@ in {
         right = 4
         bottom = 4
     }
-    layer = "overlay"
+    layer = "top"
 }

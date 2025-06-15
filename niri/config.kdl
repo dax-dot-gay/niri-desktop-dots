@@ -365,6 +365,38 @@ hotkey-overlay {
     skip-at-startup
 }
 
+window-rule {
+    match app-id="steam"
+    open-on-output "DP-1"
+}
+
+window-rule {
+    match app-id="steam"
+    match title="Steam"
+
+    open-maximized true
+}
+
+window-rule {
+    match app-id="steam"
+    exclude title="Steam"
+
+    open-floating true
+}
+
+window-rule {
+    match app-id="floorp"
+    open-on-output "HDMI-A-1"
+    open-maximized true
+}
+
+window-rule {
+    match app-id=r#"^steam_app_.*$"#
+
+    open-on-output "DP-1"
+    open-fullscreen true
+}
+
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -557,6 +589,7 @@ binds {
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
+    Mod+Ctrl+Shift+F { toggle-windowed-fullscreen; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
