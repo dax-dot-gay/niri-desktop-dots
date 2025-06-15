@@ -362,6 +362,23 @@ window-rule {
     open-on-output "DP-2"
 }
 
+
+window-rule {
+    match app-id="org.gajim.Gajim"
+    open-maximized true
+    open-on-output "DP-2"
+}
+
+window-rule {
+    match app-id="org.gajim.Gajim"
+    exclude title="Gajim"
+    open-maximized false
+    open-floating true
+    open-on-output "DP-2"
+    default-column-width {proportion 0.5;}
+    default-window-height {proportion 0.5;}
+}
+
 window-rule {
     match app-id="com.mitchellh.ghostty.float"
     open-floating true
