@@ -272,6 +272,7 @@ layer-rule {
 
 environment {
     DISPLAY ":1"
+    QT_QPA_PLATFORM "wayland"
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -350,6 +351,14 @@ window-rule {
 
 window-rule {
     match app-id="nemo"
+    open-maximized false
+    open-floating true
+    default-column-width {proportion 0.5;}
+    default-window-height {proportion 0.5;}
+}
+
+window-rule {
+    match app-id="KeePassXC"
     open-maximized false
     open-floating true
     default-column-width {proportion 0.5;}
